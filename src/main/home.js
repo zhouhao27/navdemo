@@ -53,13 +53,28 @@ var NavigationBarRouteMapper = {
     else { return null }
   },
   RightButton(route, navigator, index, navState) {
-    if (route.onPress)
+    if (route.name === 'Posts') {
       return (
         <TouchableHighlight
-          onPress={ () => route.onPress() }>
-          <Text style={styles.rightNavButtonText}>{ route.rightText || 'Right Button'}</Text>
+          onPress={ () => {
+            navigator.push({
+              rightText: 'Submit',
+              name:'NewPost',
+              component: NewPost
+            })
+          } }>
+          <Text style={styles.rightNavButtonText}>{ route.rightText }</Text>
         </TouchableHighlight>
       )
+    }
+    else if (route.name === 'NewPost') {
+      <TouchableHighlight
+        onPress={ () => {
+          alert('submit')
+        } }>
+        <Text style={styles.rightNavButtonText}>Submit</Text>
+      </TouchableHighlight>
+    }
   },
   Title(route, navigator, index, navState) {
     return <Text style={styles.title}>Posts</Text>
